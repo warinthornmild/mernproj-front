@@ -20,6 +20,7 @@ class App extends Component {
 
           <Switch>
             <Route exact path="/" component={ItemList} />
+            <Route exact path="/search" component={SearchList} />
             <Route exact path="/login" component={LogIn} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/cart" component={Cart} />

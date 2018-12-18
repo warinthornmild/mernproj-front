@@ -7,17 +7,28 @@ import _ from 'lodash';
 import './mild.css';
 
 class SearchList extends Component {
-  renderItem(item) {
-    const id = item._id;
+  componentDidMount() {}
+
+  onClickItem = async ID => {
+    console.log('dsfsdfsd');
+
+    const res = await this.props.fetchItem(ID);
+    console.log(res);
+    this.props.history.push(`/${ID}`);
+  };
+
+  renderItem(item, idx) {
+    const ID = item._id;
     const name = item.itemName;
     const price = item.itemPrice;
     const date = item.itemReleased;
     const pic = item.itemPicture;
     return (
       <a
-        href="/item"
+        // href="/item"
         style={{ textDecoration: 'none' }}
-        onClick={name => this.props.fetchItem(id)}
+        onClick={() => this.onClickItem(ID)}
+        key={idx}
       >
         <div
           class="card"
@@ -36,8 +47,13 @@ class SearchList extends Component {
   render() {
     console.log('items:', this.props.items);
     return (
-      <div className="item-list-container" onClick={() => {}}>
-        {_.map(this.props.items, this.renderItem)}
+      <div
+        className="item-list-container"
+        onClick={() => {
+          this.props.fetchItem();
+        }}
+      >
+        {_.map(this.props.items, (item, idx) => this.renderItem(item, idx))}
       </div>
     );
   }

@@ -3,7 +3,6 @@ import { fetchSearchItems } from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
 
 class Header extends Component {
   constructor(props) {
@@ -19,7 +18,7 @@ class Header extends Component {
     await this.props.fetchSearchItems(this.state.term);
     this.setState({ term: '' });
     // console.log('search items:' + this.props.items);
-    // this.props.history.push('/search');
+    this.props.history.push('/search');
   }
   componentWillReceiveProps(props) {
     // console.log('xxxczxc', props);
