@@ -6,8 +6,7 @@ import {
   POST_ORDER,
   ADDTO_CART,
   DELETE_CART,
-  CLEAR_CART,
-  LOGIN
+  CLEAR_CART
 } from './types';
 
 export const fetchItems = () => async dispatch => {
@@ -22,7 +21,7 @@ export const fetchItems = () => async dispatch => {
 };
 
 export const fetchItem = id => async dispatch => {
-  const res = await axios.get('item/get_detail_item/:id');
+  const res = await axios.get(`item/get_detail_item/${id}`);
   console.log(res.data);
   dispatch({
     type: FETCH_ITEM,
@@ -31,9 +30,10 @@ export const fetchItem = id => async dispatch => {
 };
 
 export const fetchSearchItems = term => async dispatch => {
-  console.log('HEYYYY');
-  const res = await axios.post('/search_items', term);
-
+  console.log('term:' + term);
+  const obj = { query: term };
+  const res = await axios.post('item/search_items', obj);
+  console.log('search items:', res);
   dispatch({
     type: FETCH_SEARCHITEMS,
     payload: res.data
@@ -71,7 +71,7 @@ export const clearCart = () => dispatch => {
 };
 
 export const postOrder = list => async dispatch => {
-  const res = await axios.post('/place_order', list);
+  const res = await axios.post('/place_order', {});
 
   dispatch({
     type: POST_ORDER,

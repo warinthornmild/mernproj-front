@@ -8,25 +8,29 @@ import './mild.css';
 class Cart extends Component {
   constructor(props) {
     super(props);
-    this.state = { totalPrice: 0 };
+    this.state = { orderlist: [], totalPrice: 0 };
   }
 
   componentDidMount() {}
 
-  renderItem(item) {
-    const id = item.id;
-    const name = item.name;
-    const price = item.price;
-    const amount = item.amount;
-    // const pic = item.pic;
+  orderItem = () => {};
 
+  renderItem = obj => {
+    const ID = obj.item._id;
+    const name = obj.item.itemName;
+    const price = obj.item.itemPrice;
+    const amount = obj.amount;
+    // const pic = this.props.item.itemPicture;
+    for (let i = 0; i < amount; i++) {
+      this.setState({ orderlist: [obj.item, ...this.state.orderlist] });
+    }
     this.setState({ totalPrice: this.state.totalPrice + price * amount });
 
     return (
       <a
-        href="/:id"
+        // href="/:id"
         style={{ textDecoration: 'none' }}
-        onClick={name => this.props.fetchItem(id)}
+        // onClick={name => this.props.fetchItem(id)}
       >
         <div
           class="card"
@@ -42,13 +46,13 @@ class Cart extends Component {
         <a href="/cart" class="btn btn-info btn-lg">
           <span
             class="glyphicon glyphicon-remove"
-            onClick={() => this.props.deleteCart(id)}
+            onClick={() => this.props.deleteCart(ID)}
           />
           Remove
         </a>
       </a>
     );
-  }
+  };
   render() {
     console.log('cart:', this.props.cart);
 
@@ -59,10 +63,13 @@ class Cart extends Component {
         <p>Total Price : {this.state.totalPrice} baht</p>
         <button
           onClick={() => {
+            this.orderItems();
             this.props.postOrder();
             this.props.clearCart();
           }}
-        />
+        >
+          order
+        </button>
       </div>
     );
   }

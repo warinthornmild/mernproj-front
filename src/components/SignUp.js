@@ -26,12 +26,12 @@ class SignUp extends Component {
   onFormSubmit = async event => {
     console.log('dsfsdfsd');
 
-    const res = await axios.post(
-      '/user/sign_up',
-      (this.state.username, this.state.password)
-    );
+    const res = await axios.post('/user/sign_up', {
+      username: this.state.username,
+      password: this.state.password
+    });
     console.log(res);
-    return <Redirect to="/login" />;
+    this.props.history.push('/login');
   };
 
   render() {
@@ -84,7 +84,7 @@ class SignUp extends Component {
             <button
               type="signup"
               class="btn btn-primary"
-              onClick={this.onFormSubmit}
+              onClick={() => this.onFormSubmit()}
             >
               Sign Up
             </button>

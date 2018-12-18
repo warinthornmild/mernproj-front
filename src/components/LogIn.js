@@ -27,14 +27,19 @@ class LogIn extends Component {
     event.preventDefault();
 
     console.log('HEYYY');
-    const res = await axios.post(
-      '/user/sign_in',
-      (this.state.username, this.state.password)
-    );
+    const res = await axios.post('user/sign_in', {
+      username: this.state.username,
+      password: this.state.password
+    });
 
-    localStorage.token = res;
+    localStorage.setItem('token', res);
+    // localStorage.token = res;
     console.log(res);
-    return <Redirect to="/" />;
+    console.log(localStorage.getItem('token'));
+    if (res.statusText == 'OK') alert("You're already logged in");
+    else alert('Username or Password are incorrect');
+    window.location = '/';
+    // this.props.history.push('/');
   };
 
   render() {

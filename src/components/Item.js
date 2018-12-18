@@ -16,6 +16,7 @@ class Item extends Component {
   };
 
   render() {
+    console.log('item', this.props.item);
     const ID = this.props.item._id;
     const name = this.props.item.itemName;
     const price = this.props.item.itemPrice;

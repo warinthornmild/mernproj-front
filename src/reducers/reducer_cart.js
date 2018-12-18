@@ -5,10 +5,7 @@ export default function(state = [], action) {
   if (action.type == ADDTO_CART) {
     return [
       {
-        id: action.id,
-        name: action.name,
-        pic: action.pic,
-        price: action.price,
+        item: action.item,
         amount: action.amount
       },
       ...state

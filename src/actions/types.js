@@ -5,4 +5,3 @@ export const ADDTO_CART = 'addto_cart';
 export const DELETE_CART = 'delete_cart';
 export const CLEAR_CART = 'clear_cart';
 export const POST_ORDER = 'post_order';
-export const LOGIN = 'login';
