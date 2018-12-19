@@ -32,7 +32,7 @@ class ItemList extends Component {
       >
         <div
           class="card"
-          style={{ width: '18rem', margin: '10px 10px 10px 10px' }}
+          style={{ width: '18rem', margin: '10px 10px 10px 10px', color: '#6F7073' }}
         >
           <img class="card-img-top" src={imurl} alt="Card image cap" />
           <div class="card-body">

@@ -3,9 +3,7 @@
   display: grid;
   grid-template-columns: auto auto auto auto;
   font-family: 'Roboto', sans-serif;
-}
-
-.item-block {
+  top: 80%;
 }
 
 .header-login {

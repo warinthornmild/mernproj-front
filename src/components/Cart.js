@@ -51,8 +51,8 @@ class Cart extends Component {
     if (res.data.message === 'Success') {
       localStorage.setItem('cart', JSON.stringify([]));
       this.props.history.push(`/cart`);
-      alert('Order Success');
-    } else alert('Order Failed');
+      alert('Thank you for your order!');
+    } else alert('Order Failed.');
   };
 
   renderItem = obj => {
@@ -66,27 +66,27 @@ class Cart extends Component {
     localStorage.setItem(
       'totalPrice',
       parseInt(localStorage.getItem('totalPrice')) +
-        parseInt(price) * parseInt(amount)
+      parseInt(price) * parseInt(amount)
     );
 
     return (
       <a
         // href="/:id"
         style={{ textDecoration: 'none' }}
-        // onClick={name => this.props.fetchItem(id)}
+      // onClick={name => this.props.fetchItem(id)}
       >
         <div
           class="card"
-          style={{ width: '18rem', margin: '10px 10px 10px 10px' }}
+          style={{ width: '18rem', margin: '10px 10px 10px 10px', color: '#4A4B4C' }}
         >
           <img class="card-img-top" src={imurl} alt="Card image cap" />
-          <div class="card-body">
+          <div class="card-body" >
             <h5 class="card-title">{name}</h5>
             <p class="card-text">amount : {amount} pieces</p>
             <p class="card-text">Price : {price * amount} baht</p>
           </div>
         </div>
-        <button onClick={() => this.deleteCart(ID)}>Remove</button>
+        <button class="btn btn-danger" style={{ margin: '10px' }} onClick={() => this.deleteCart(ID)}>Remove</button>
       </a>
     );
   };
@@ -97,18 +97,23 @@ class Cart extends Component {
     localStorage.setItem('totalPrice', 0);
 
     return (
-      <div className="item-list-container" onClick={() => {}}>
-        {_.map(JSON.parse(localStorage.getItem('cart')), this.renderItem)}
-
-        <p>Total Price : {localStorage.getItem('totalPrice')} baht</p>
-        <button
-          onClick={() => {
-            this.placeOrder();
-          }}
-        >
-          order
+      <div style={{ padding: '20px' }}>
+        <div className="item-list-container"
+          style={{ color: '#4A4B4C' }}
+          onClick={() => { }}>
+          {_.map(JSON.parse(localStorage.getItem('cart')), this.renderItem)}
+        </div>
+        <div style={{ textAlign: "left", fontSize: '20px', color: '#4A4B4C', borderTop: '4ps solid grey' }}>
+          < div > Total Price: {localStorage.getItem('totalPrice')} baht</div>
+          <button class="btn btn-success btn-lg btn-block" style={{ margin: '10px', padding: '20px' }}
+            onClick={() => {
+              this.placeOrder();
+            }}
+          >
+            order
         </button>
-      </div>
+        </div>
+      </div >
     );
   }
 }
