@@ -40,7 +40,8 @@ class LogIn extends Component {
 
     if (res.data.message == 'Success') {
       alert("You're already logged in");
-      console.log(localStorage.getItem('token'));
+      localStorage.setItem('token', res.data.token);
+      console.log('token', localStorage.getItem('token'));
       localStorage.setItem('user', this.state.username);
       localStorage.setItem('cart', JSON.stringify([]));
       console.log('user:', localStorage.getItem('user'));
@@ -49,7 +50,7 @@ class LogIn extends Component {
       alert('Username or Password are incorrect');
       window.location = '/login';
     }
-    // this.props.history.push('/');
+    this.props.history.push('/');
   };
 
   render() {

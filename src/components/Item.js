@@ -13,18 +13,23 @@ class Item extends Component {
   }
 
   onClickSubmit = () => {
-    const item = { item: this.props.item, amount: this.state.amount };
-    console.log(
-      'cart',
-      JSON.stringify({ item: this.props.item, amount: this.state.amount })
-    );
-    const itemArray = JSON.parse(localStorage.getItem('cart'));
-    itemArray.push(item);
-    localStorage.setItem('cart', JSON.stringify(itemArray));
+    if (localStorage.getItem('user') == '') {
+      alert('You have to login to buy item');
+      window.location = '/login';
+    } else {
+      const item = { item: this.props.item, amount: this.state.amount };
+      console.log(
+        'cart',
+        JSON.stringify({ item: this.props.item, amount: this.state.amount })
+      );
+      const itemArray = JSON.parse(localStorage.getItem('cart'));
+      itemArray.push(item);
+      localStorage.setItem('cart', JSON.stringify(itemArray));
 
-    // for(let i=0; )
-    console.log('result', JSON.parse(localStorage.getItem('cart')));
-    alert('Order Success');
+      // for(let i=0; )
+      console.log('result', JSON.parse(localStorage.getItem('cart')));
+      alert('Add to cart success');
+    }
   };
 
   onChange = e => {
@@ -73,13 +78,14 @@ class Item extends Component {
               {amountItem < 1 && <p class="card-text">Status : Sold Out</p>}
             </div>
           </div>
-          <div style={{ position: 'absolute', bottom: '0' }}>
+          <div style={{ position: 'absolute' }}>
             <input
               type="number"
               id="amount"
               name="amount"
               min="1"
               max={amountItem}
+              defaultValue="0"
               style={{ width: '100px', margin: '25px' }}
               onChange={this.onChange}
             />

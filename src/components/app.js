@@ -20,11 +20,12 @@ class App extends Component {
 
           <Switch>
             <Route exact path="/" component={ItemList} />
-            <Route exact path="/item" component={Item} />
+            {/* <Route exact path="/item" component={Item} /> */}
             <Route exact path="/search" component={SearchList} />
             <Route exact path="/login" component={LogIn} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/item" component={Item} />
           </Switch>
         </div>
       </BrowserRouter>

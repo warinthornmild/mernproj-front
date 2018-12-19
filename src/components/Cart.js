@@ -36,17 +36,26 @@ class Cart extends Component {
       }
     });
 
-    // for (let i = 0; i < itemArray.length; i++) {
-    //   console.log('i=', i);
-    //   for (let j = 0; j < itemArray[i].amount; i++) {
-    //     orderArray.push(itemArray[i].item);
-    //     console.log(JSON.stringify(orderArray));
-    //   }
-    // }
+    const today = new Date();
+    console.log(
+      'today',
+      today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+    );
 
-    const res = await axios.post('/place_order', { orderList: orderArray });
+    const config = {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    };
+    const res = await axios.post(
+      'http://localhost:5000/order/place_order',
+      { orderList: orderArray, orderDated: today },
+      config
+    );
 
-    // localStorage.setItem('cart', JSON.stringify([]));
+    if (res.data.message === 'Success') {
+      localStorage.setItem('cart', JSON.stringify([]));
+      this.props.history.push(`/cart`);
+      alert('Order Success');
+    } else alert('Order Failed');
   };
 
   renderItem = obj => {
@@ -54,7 +63,8 @@ class Cart extends Component {
     const name = obj.item.itemName;
     const price = obj.item.itemPrice;
     const amount = obj.amount;
-    // const pic = this.props.item.itemPicture;
+    const pic = obj.item.itemPicture;
+    const imurl = '/images/' + pic;
 
     localStorage.setItem(
       'totalPrice',
@@ -72,10 +82,10 @@ class Cart extends Component {
           class="card"
           style={{ width: '18rem', margin: '10px 10px 10px 10px' }}
         >
-          <img class="card-img-top" src="" alt="Card image cap" />
+          <img class="card-img-top" src={imurl} alt="Card image cap" />
           <div class="card-body">
             <h5 class="card-title">{name}</h5>
-            <p class="card-text">amount : {amount} baht</p>
+            <p class="card-text">amount : {amount} pieces</p>
             <p class="card-text">Price : {price * amount} baht</p>
           </div>
         </div>
@@ -85,6 +95,8 @@ class Cart extends Component {
   };
   render() {
     console.log('cart:', this.props.cart);
+    console.log('token:', localStorage.getItem('token'));
+
     localStorage.setItem('totalPrice', 0);
 
     return (
