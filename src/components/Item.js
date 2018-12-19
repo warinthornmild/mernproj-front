@@ -84,6 +84,12 @@ class Item extends Component {
             <button
               class="btn btn-success"
               type="button"
+              className={
+                amountItem > 0
+                  ? 'btn btn-success map-button'
+                  : 'btn btn-secondary map-button'
+              }
+              disabled={amountItem > 0 ? '' : 'true'}
               style={{ paddingLeft: '20px' }}
               onClick={() => this.onClickSubmit()}
             >
