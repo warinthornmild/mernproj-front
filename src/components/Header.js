@@ -3,7 +3,6 @@ import { fetchSearchItems } from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
-import LogIn from './LogIn';
 
 class Header extends Component {
   constructor(props) {
@@ -18,8 +17,6 @@ class Header extends Component {
     if (localStorage.getItem('user') != '') {
       this.setState({ isLogIn: 1 });
     }
-    console.log('status=', localStorage.getItem('user'));
-    console.log('log in ?', this.state.isLogIn);
   }
 
   onInputChange(event) {
@@ -30,7 +27,6 @@ class Header extends Component {
     localStorage.setItem('user', '');
     alert("You're already logged out");
     window.location = '/';
-    // this.props.history.push('/');
   }
 
   async onFormSubmit() {
@@ -39,9 +35,7 @@ class Header extends Component {
     // console.log('search items:' + this.props.items);
     this.props.history.push('/search');
   }
-  componentWillReceiveProps(props) {
-    // console.log('xxxczxc', props);
-  }
+
   render() {
     return (
       <nav

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import './mild.css';
-import { addToCart } from '../actions';
 
 class Item extends Component {
   constructor(props) {
@@ -18,16 +16,11 @@ class Item extends Component {
       window.location = '/login';
     } else {
       const item = { item: this.props.item, amount: this.state.amount };
-      console.log(
-        'cart',
-        JSON.stringify({ item: this.props.item, amount: this.state.amount })
-      );
       const itemArray = JSON.parse(localStorage.getItem('cart'));
       itemArray.push(item);
       localStorage.setItem('cart', JSON.stringify(itemArray));
 
-      // for(let i=0; )
-      console.log('result', JSON.parse(localStorage.getItem('cart')));
+      console.log('cart', JSON.parse(localStorage.getItem('cart')));
       alert('Add to cart success');
     }
   };
@@ -37,7 +30,6 @@ class Item extends Component {
   };
 
   render() {
-    console.log('item2', this.props.item);
     const ID = this.props.item._id;
     const name = this.props.item.itemName;
     const price = this.props.item.itemPrice;
@@ -104,15 +96,8 @@ class Item extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ addToCart }, dispatch);
+function mapStateToProps({ item }) {
+  return { item };
 }
 
-function mapStateToProps({ item, cart }) {
-  return { item, cart };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Item);
+export default connect(mapStateToProps)(Item);

@@ -9,15 +9,10 @@ import './mild.css';
 class ItemList extends Component {
   componentDidMount() {
     this.props.fetchItems();
-    console.log('HEYYY');
-    console.log('cart from home', localStorage.getItem('cart'));
   }
 
   onClickItem = async ID => {
-    console.log('dsfsdfsd', ID);
-
     await this.props.fetchItem(ID);
-    console.log('item', this.props.item);
     this.props.history.push(`/item`);
   };
 
@@ -64,8 +59,8 @@ class ItemList extends Component {
   }
 }
 
-function mapStateToProps({ items, item, cart }) {
-  return { items, item, cart };
+function mapStateToProps({ items, item }) {
+  return { items, item };
 }
 
 function mapDispatchToProps(dispatch) {

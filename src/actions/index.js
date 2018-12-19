@@ -1,13 +1,5 @@
 import axios from 'axios';
-import {
-  FETCH_ITEMS,
-  FETCH_ITEM,
-  FETCH_SEARCHITEMS,
-  POST_ORDER,
-  ADDTO_CART,
-  DELETE_CART,
-  CLEAR_CART
-} from './types';
+import { FETCH_ITEMS, FETCH_ITEM, FETCH_SEARCHITEMS } from './types';
 
 export const fetchItems = () => async dispatch => {
   // const res = await axios.get('/item/get_all_items', { headers: {"Authorization" : `Bearer ${localStorage.token}`} });
@@ -43,54 +35,3 @@ export const fetchSearchItems = term => async dispatch => {
     payload: res.data
   });
 };
-
-// export const fetchTypeItems = type => async dispatch => {
-//   const res = await axios.post('/search_items', type);
-
-//   dispatch({
-//     type: FETCH_TYPEITEMS,
-//     payload: res.data
-//   });
-// };
-
-export const addToCart = (item, amount) => dispatch => {
-  console.log('hhhh');
-  console.log('item', item);
-  console.log('amount', amount);
-  dispatch({
-    type: ADDTO_CART,
-    item: item,
-    amount: amount
-  });
-};
-
-export const deleteCart = id => dispatch => {
-  dispatch({
-    type: DELETE_CART,
-    id: id
-  });
-};
-
-export const clearCart = () => dispatch => {
-  dispatch({
-    type: CLEAR_CART
-  });
-};
-
-export const postOrder = list => async dispatch => {
-  const res = await axios.post('/place_order', { orderList: list });
-
-  dispatch({
-    type: POST_ORDER,
-    status: res.data
-  });
-};
-
-// export const fetchOrder = list => async dispatch => {
-//   const res = await axios.get('');
-
-//   dispatch({
-//     type: POST_ORDER,
-//     payload: res.data
-//   });
-// };

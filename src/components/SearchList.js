@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchItems } from '../actions/index';
-import { fetchItem } from '../actions/index';
+import { fetchItems, fetchItem } from '../actions/index';
 import _ from 'lodash';
 import './mild.css';
 
