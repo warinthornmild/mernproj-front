@@ -13,8 +13,6 @@ class Cart extends Component {
 
   componentDidMount() {}
 
-  orderItem = () => {};
-
   renderItem = obj => {
     const ID = obj.item._id;
     const name = obj.item.itemName;
@@ -63,8 +61,7 @@ class Cart extends Component {
         <p>Total Price : {this.state.totalPrice} baht</p>
         <button
           onClick={() => {
-            this.orderItems();
-            this.props.postOrder();
+            this.props.postOrder(this.state.orderlist);
             this.props.clearCart();
           }}
         >

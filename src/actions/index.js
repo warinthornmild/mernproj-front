@@ -21,8 +21,12 @@ export const fetchItems = () => async dispatch => {
 };
 
 export const fetchItem = id => async dispatch => {
-  const res = await axios.get(`item/get_detail_item/${id}`);
-  console.log(res.data);
+  console.log('gggg');
+  const res = await axios.get(
+    `http://localhost:5000/item/get_detail_item/${id}`
+  );
+  console.log(`id :  ${id}`);
+  console.log('res', res.data);
   dispatch({
     type: FETCH_ITEM,
     payload: res.data
@@ -71,7 +75,7 @@ export const clearCart = () => dispatch => {
 };
 
 export const postOrder = list => async dispatch => {
-  const res = await axios.post('/place_order', {});
+  const res = await axios.post('/place_order', { orderList: list });
 
   dispatch({
     type: POST_ORDER,

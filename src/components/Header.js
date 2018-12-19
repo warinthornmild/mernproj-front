@@ -3,15 +3,34 @@ import { fetchSearchItems } from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
+import LogIn from './LogIn';
 
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = { term: '' };
+    this.state = {
+      term: '',
+      isLogIn: 0
+    };
+  }
+
+  componentDidMount() {
+    if (localStorage.getItem('user') != '') {
+      this.setState({ isLogIn: 1 });
+    }
+    console.log('status=', localStorage.getItem('user'));
+    console.log('log in ?', this.state.isLogIn);
   }
 
   onInputChange(event) {
     this.setState({ term: event.target.value });
+  }
+
+  onLogOutClick() {
+    localStorage.setItem('user', '');
+    alert("You're already logged out");
+    window.location = '/';
+    // this.props.history.push('/');
   }
 
   async onFormSubmit() {
@@ -31,7 +50,7 @@ class Header extends Component {
       >
         <a class="navbar-brand" href="/">
           {' '}
-          Navbar
+          MildMonO.com
         </a>
         <button
           class="navbar-toggler"
@@ -45,8 +64,10 @@ class Header extends Component {
           <span class="navbar-toggler-icon" />
         </button>
 
-        <div class="col-md-10" style={{ textAlign: 'right' }}>
-          {/* <form class="form-inline my-2 my-lg-0"> */}
+        <div
+          class="col-md-10 form-inline"
+          style={{ textAlign: 'left', display: 'inline' }}
+        >
           <input
             class="form-control mr-sm-2"
             type="search"
@@ -65,46 +86,47 @@ class Header extends Component {
           >
             Search
           </button>
-          {/* </form> */}
         </div>
 
-        <div class="col-md-1">
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  User
-                </a>
-                <div
-                  class="dropdown-menu dropdown-menu-right"
-                  aria-labelledby="navbarDropdown"
-                >
-                  <a class="dropdown-item" href="#">
-                    Profile
+        {this.state.isLogIn == 0 && (
+          <a className="navbar-brand" href="/login">
+            Log In
+          </a>
+        )}
+
+        {this.state.isLogIn == 1 && (
+          <div class="col-md-1">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    User
                   </a>
-                  <a class="dropdown-item" href="#">
-                    Order
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    History
-                  </a>
-                  <div class="dropdown-divider" />
-                  <a class="dropdown-item" href="#">
-                    Log Out
-                  </a>
-                </div>
-              </li>
-            </ul>
+                  <div
+                    class="dropdown-menu dropdown-menu-right"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    <a class="dropdown-item" href="#">
+                      Cart
+                    </a>
+                    <div class="dropdown-divider" />
+                    <a class="dropdown-item" onClick={this.onLogOutClick}>
+                      Log Out
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
+        )}
       </nav>
     );
   }

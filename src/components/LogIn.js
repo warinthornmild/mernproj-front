@@ -35,12 +35,17 @@ class LogIn extends Component {
     localStorage.setItem('token', res);
     localStorage.setItem('user', this.state.username);
     // localStorage.token = res;
-    console.log(res);
-    console.log(localStorage.getItem('token'));
-    console.log('user:', localStorage.getItem('user'));
-    if (res.statusText == 'OK') alert("You're already logged in");
-    else alert('Username or Password are incorrect');
-    window.location = '/';
+    console.log(res.data);
+
+    if (res.data.message == 'Success') {
+      alert("You're already logged in");
+      console.log(localStorage.getItem('token'));
+      console.log('user:', localStorage.getItem('user'));
+      window.location = '/';
+    } else {
+      alert('Username or Password are incorrect');
+      window.location = '/login';
+    }
     // this.props.history.push('/');
   };
 
