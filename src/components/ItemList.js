@@ -10,6 +10,7 @@ class ItemList extends Component {
   componentDidMount() {
     this.props.fetchItems();
     console.log('HEYYY');
+    console.log('cart from home', localStorage.getItem('cart'));
   }
 
   onClickItem = async ID => {
@@ -63,8 +64,8 @@ class ItemList extends Component {
   }
 }
 
-function mapStateToProps({ items, item }) {
-  return { items, item };
+function mapStateToProps({ items, item, cart }) {
+  return { items, item, cart };
 }
 
 function mapDispatchToProps(dispatch) {

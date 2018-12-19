@@ -32,14 +32,17 @@ class LogIn extends Component {
       password: this.state.password
     });
 
-    localStorage.setItem('token', res);
-    localStorage.setItem('user', this.state.username);
+    // localStorage.setItem('token', res);
+    // localStorage.setItem('user', this.state.username);
+    // localStorage.setItem('cart', JSON.stringify([]));
     // localStorage.token = res;
     console.log(res.data);
 
     if (res.data.message == 'Success') {
       alert("You're already logged in");
       console.log(localStorage.getItem('token'));
+      localStorage.setItem('user', this.state.username);
+      localStorage.setItem('cart', JSON.stringify([]));
       console.log('user:', localStorage.getItem('user'));
       window.location = '/';
     } else {

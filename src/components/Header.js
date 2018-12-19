@@ -114,7 +114,7 @@ class Header extends Component {
                     class="dropdown-menu dropdown-menu-right"
                     aria-labelledby="navbarDropdown"
                   >
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="/cart">
                       Cart
                     </a>
                     <div class="dropdown-divider" />

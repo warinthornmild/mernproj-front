@@ -23,6 +23,7 @@ class SearchList extends Component {
     const price = item.itemPrice;
     const date = item.itemReleased;
     const pic = item.itemPicture;
+    const imurl = '/images/' + pic;
     return (
       <a
         // href="/item"
@@ -34,7 +35,7 @@ class SearchList extends Component {
           class="card"
           style={{ width: '18rem', margin: '10px 10px 10px 10px' }}
         >
-          <img class="card-img-top" src="" alt="Card image cap" />
+          <img class="card-img-top" src={imurl} alt="Card image cap" />
           <div class="card-body">
             <h5 class="card-title">{name}</h5>
             <p class="card-text">Price : {price} baht</p>

@@ -13,7 +13,17 @@ class Item extends Component {
   }
 
   onClickSubmit = () => {
-    this.props.addToCart(this.props.item, this.state.amount);
+    const item = { item: this.props.item, amount: this.state.amount };
+    console.log(
+      'cart',
+      JSON.stringify({ item: this.props.item, amount: this.state.amount })
+    );
+    const itemArray = JSON.parse(localStorage.getItem('cart'));
+    itemArray.push(item);
+    localStorage.setItem('cart', JSON.stringify(itemArray));
+
+    // for(let i=0; )
+    console.log('result', JSON.parse(localStorage.getItem('cart')));
     alert('Order Success');
   };
 
@@ -27,14 +37,16 @@ class Item extends Component {
     const name = this.props.item.itemName;
     const price = this.props.item.itemPrice;
     const date = this.props.item.itemReleased;
+    const desc = this.props.item.itemDesc;
     const pic = this.props.item.itemPicture;
+    const amountItem = this.props.item.itemAmount;
     const imurl = '/images/' + pic;
     return (
       <div>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="#">Home</a>
+              <a href="/">Home</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
               Item
@@ -43,29 +55,31 @@ class Item extends Component {
         </nav>
 
         <div class="left-col">
-          <img src="1040518_in_pp.jpg" />
-        </div>
-
-        <div
-          class="card"
-          style={{ width: '18rem', margin: '10px 10px 10px 10px' }}
-        >
           <img class="card-img-top" src={imurl} alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title">{name}</h5>
-            <p class="card-text">Price : {price} baht</p>
-            <p class="card-text">Released Date : {date.split('T')[0]}</p>
-          </div>
         </div>
 
         <div class="right-col">
-          <h4 style={{ paddingLeft: '20px', padding: '10px' }}>Detail:</h4>
+          <h4 style={{ paddingLeft: '30px', padding: '10px' }}>Detail:</h4>
+          <div
+            class="card"
+            style={{ width: '18rem', margin: '10px 10px 10px 10px' }}
+          >
+            <div class="card-body">
+              <h5 class="card-title">{name}</h5>
+              <p class="card-text">Price : {price} baht</p>
+              <p class="card-text">Description: {desc} </p>
+              <p class="card-text">Released Date : {date.split('T')[0]}</p>
+              {amountItem > 0 && <p class="card-text">Status : Avaliable</p>}
+              {amountItem < 1 && <p class="card-text">Status : Sold Out</p>}
+            </div>
+          </div>
           <div style={{ position: 'absolute', bottom: '0' }}>
             <input
               type="number"
               id="amount"
               name="amount"
               min="1"
+              max={amountItem}
               style={{ width: '100px', margin: '25px' }}
               onChange={this.onChange}
             />
@@ -88,8 +102,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ addToCart }, dispatch);
 }
 
-function mapStateToProps({ item }) {
-  return { item };
+function mapStateToProps({ item, cart }) {
+  return { item, cart };
 }
 
 export default connect(

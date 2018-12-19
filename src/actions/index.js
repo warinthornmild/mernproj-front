@@ -54,6 +54,9 @@ export const fetchSearchItems = term => async dispatch => {
 // };
 
 export const addToCart = (item, amount) => dispatch => {
+  console.log('hhhh');
+  console.log('item', item);
+  console.log('amount', amount);
   dispatch({
     type: ADDTO_CART,
     item: item,

@@ -3,6 +3,10 @@ import _ from 'lodash';
 
 export default function(state = [], action) {
   if (action.type == ADDTO_CART) {
+    console.log({
+      item: action.item,
+      amount: action.amount
+    });
     return [
       {
         item: action.item,
@@ -18,7 +22,7 @@ export default function(state = [], action) {
       if (action.item.id == state[i].item.id);
       else state2 = [...state2, state[i]];
     }
-    return [];
+    return state2;
   }
 
   if (action.type == CLEAR_CART) {

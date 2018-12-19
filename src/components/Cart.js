@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { clearCart, deleteCart, postOrder } from '../actions/index';
@@ -6,12 +7,47 @@ import _ from 'lodash';
 import './mild.css';
 
 class Cart extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { orderlist: [], totalPrice: 0 };
-  }
+  deleteCart = async id => {
+    console.log('heyyy');
+    const itemArray = JSON.parse(localStorage.getItem('cart'));
+    console.log(itemArray);
+    const tmp = [];
 
-  componentDidMount() {}
+    await _.map(itemArray, obj => {
+      console.log(obj.item._id, id, obj.item._id == id);
+      if (obj.item._id == id);
+      else tmp.push(obj);
+    });
+    // console.log(tmp);
+    localStorage.setItem('cart', JSON.stringify(tmp));
+
+    this.props.history.push(`/cart`);
+  };
+
+  placeOrder = async () => {
+    console.log('array cart', JSON.parse(localStorage.getItem('cart')));
+    const itemArray = JSON.parse(localStorage.getItem('cart'));
+    const orderArray = [];
+
+    _.map(itemArray, obj => {
+      for (let j = 0; j < obj.amount; j++) {
+        orderArray.push(obj.item);
+        console.log(JSON.stringify(orderArray));
+      }
+    });
+
+    // for (let i = 0; i < itemArray.length; i++) {
+    //   console.log('i=', i);
+    //   for (let j = 0; j < itemArray[i].amount; i++) {
+    //     orderArray.push(itemArray[i].item);
+    //     console.log(JSON.stringify(orderArray));
+    //   }
+    // }
+
+    const res = await axios.post('/place_order', { orderList: orderArray });
+
+    // localStorage.setItem('cart', JSON.stringify([]));
+  };
 
   renderItem = obj => {
     const ID = obj.item._id;
@@ -19,10 +55,12 @@ class Cart extends Component {
     const price = obj.item.itemPrice;
     const amount = obj.amount;
     // const pic = this.props.item.itemPicture;
-    for (let i = 0; i < amount; i++) {
-      this.setState({ orderlist: [obj.item, ...this.state.orderlist] });
-    }
-    this.setState({ totalPrice: this.state.totalPrice + price * amount });
+
+    localStorage.setItem(
+      'totalPrice',
+      parseInt(localStorage.getItem('totalPrice')) +
+        parseInt(price) * parseInt(amount)
+    );
 
     return (
       <a
@@ -41,28 +79,22 @@ class Cart extends Component {
             <p class="card-text">Price : {price * amount} baht</p>
           </div>
         </div>
-        <a href="/cart" class="btn btn-info btn-lg">
-          <span
-            class="glyphicon glyphicon-remove"
-            onClick={() => this.props.deleteCart(ID)}
-          />
-          Remove
-        </a>
+        <button onClick={() => this.deleteCart(ID)}>Remove</button>
       </a>
     );
   };
   render() {
     console.log('cart:', this.props.cart);
+    localStorage.setItem('totalPrice', 0);
 
     return (
       <div className="item-list-container" onClick={() => {}}>
-        {_.map(this.props.cart, this.renderItem)}
+        {_.map(JSON.parse(localStorage.getItem('cart')), this.renderItem)}
 
-        <p>Total Price : {this.state.totalPrice} baht</p>
+        <p>Total Price : {localStorage.getItem('totalPrice')} baht</p>
         <button
           onClick={() => {
-            this.props.postOrder(this.state.orderlist);
-            this.props.clearCart();
+            this.placeOrder();
           }}
         >
           order
@@ -72,15 +104,4 @@ class Cart extends Component {
   }
 }
 
-function mapStateToProps({ cart }) {
-  return { cart };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ clearCart, deleteCart, postOrder }, dispatch);
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cart);
+export default Cart;
