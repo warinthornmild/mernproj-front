@@ -9,11 +9,8 @@ class SearchList extends Component {
   componentDidMount() {}
 
   onClickItem = async ID => {
-    console.log('dsfsdfsd');
-
-    const res = await this.props.fetchItem(ID);
-    console.log(res);
-    this.props.history.push(`/${ID}`);
+    await this.props.fetchItem(ID);
+    this.props.history.push(`/item`);
   };
 
   renderItem(item, idx) {
