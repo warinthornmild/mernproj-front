@@ -23,7 +23,6 @@ class Item extends Component {
       console.log('cart', JSON.parse(localStorage.getItem('cart')));
       alert('Go to cart to see your order!');
       window.location = '/cart';
-
     }
   };
 
@@ -41,29 +40,29 @@ class Item extends Component {
     const amountItem = this.props.item.itemAmount;
     const imurl = '/images/' + pic;
     return (
-      <div >
+      <div>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
               <a href="/">Home</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-              Item
+              {name}
             </li>
           </ol>
         </nav>
 
-        <div class="left-col" style={{ color: "#6F7073" }}>
+        <div class="left-col" style={{ color: '#6F7073' }}>
           <img class="card-img-top" src={imurl} alt="Card image cap" />
         </div>
 
-        <div class="right-col" style={{ color: "#6F7073" }}>
+        <div class="right-col" style={{ color: '#6F7073' }}>
           <h4 style={{ paddingLeft: '30px', padding: '10px' }}>Detail:</h4>
           <div
             class="card"
             style={{ width: '18rem', margin: '10px 10px 10px 10px' }}
           >
-            <div class="card-body" >
+            <div class="card-body">
               <h5 class="card-title">{name}</h5>
               <p class="card-text">Price : {price} baht</p>
               <p class="card-text">Description: {desc} </p>

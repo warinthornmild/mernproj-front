@@ -44,7 +44,7 @@ class Header extends Component {
       >
         <a class="navbar-brand" href="/">
           {' '}
-          MildMonO.com
+          MERN
         </a>
         <button
           class="navbar-toggler"
