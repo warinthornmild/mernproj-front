@@ -11,6 +11,11 @@ class Item extends Component {
   }
 
   onClickSubmit = () => {
+    if (this.state.amount < 1) {
+      alert('Value must be greater than or equal to 1.');
+      return;
+    }
+
     if (localStorage.getItem('user') == '') {
       alert('You have to login first!');
       window.location = '/login';
@@ -73,17 +78,20 @@ class Item extends Component {
               {amountItem < 1 && <p className="card-text">Status : Sold Out</p>}
             </div>
           </div>
+
           <div style={{ position: 'absolute' }}>
-            <input
-              type="number"
-              id="amount"
-              name="amount"
-              min="0"
-              max={amountItem}
-              defaultValue="0"
-              style={{ width: '100px', margin: '25px' }}
-              onChange={this.onChange}
-            />
+            <form>
+              <input
+                type="number"
+                id="amount"
+                name="amount"
+                min="1"
+                max={amountItem}
+                defaultValue="1"
+                style={{ width: '100px', margin: '25px' }}
+                onChange={this.onChange}
+              />
+            </form>
             <button
               className="btn btn-success"
               type="button"
