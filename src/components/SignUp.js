@@ -28,7 +28,7 @@ class SignUp extends Component {
       password: this.state.password
     });
     console.log(res);
-    this.props.history.push('/login');
+    window.location = '/login';
   };
 
   render() {

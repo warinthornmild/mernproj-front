@@ -32,7 +32,8 @@ class Item extends Component {
   };
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    console.log(Math.floor(e.target.value));
+    this.setState({ [e.target.name]: Math.floor(e.target.value) });
   };
 
   render() {
