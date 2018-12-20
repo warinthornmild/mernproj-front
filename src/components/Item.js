@@ -42,33 +42,35 @@ class Item extends Component {
     return (
       <div>
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
               <a href="/">Home</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">
+            <li className="breadcrumb-item active" aria-current="page">
               {name}
             </li>
           </ol>
         </nav>
 
-        <div class="left-col" style={{ color: '#6F7073' }}>
-          <img class="card-img-top" src={imurl} alt="Card image cap" />
+        <div className="left-col" style={{ color: '#6F7073' }}>
+          <img className="card-img-top" src={imurl} alt="Card image cap" />
         </div>
 
-        <div class="right-col" style={{ color: '#6F7073' }}>
+        <div className="right-col" style={{ color: '#6F7073' }}>
           <h4 style={{ paddingLeft: '30px', padding: '10px' }}>Detail:</h4>
           <div
-            class="card"
+            className="card"
             style={{ width: '18rem', margin: '10px 10px 10px 10px' }}
           >
-            <div class="card-body">
-              <h5 class="card-title">{name}</h5>
-              <p class="card-text">Price : {price} baht</p>
-              <p class="card-text">Description: {desc} </p>
-              <p class="card-text">Released Date : {date.split('T')[0]}</p>
-              {amountItem > 0 && <p class="card-text">Status : Avaliable</p>}
-              {amountItem < 1 && <p class="card-text">Status : Sold Out</p>}
+            <div className="card-body">
+              <h5 className="card-title">{name}</h5>
+              <p className="card-text">Price : {price} baht</p>
+              <p className="card-text">Description: {desc} </p>
+              <p className="card-text">Released Date : {date.split('T')[0]}</p>
+              {amountItem > 0 && (
+                <p className="card-text">Status : Avaliable</p>
+              )}
+              {amountItem < 1 && <p className="card-text">Status : Sold Out</p>}
             </div>
           </div>
           <div style={{ position: 'absolute' }}>
@@ -83,7 +85,7 @@ class Item extends Component {
               onChange={this.onChange}
             />
             <button
-              class="btn btn-success"
+              className="btn btn-success"
               type="button"
               className={
                 amountItem > 0

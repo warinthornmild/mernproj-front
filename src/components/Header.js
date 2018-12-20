@@ -39,15 +39,15 @@ class Header extends Component {
   render() {
     return (
       <nav
-        class="navbar navbar-expand-lg navbar-dark justify-content-between"
+        className="navbar navbar-expand-lg navbar-dark justify-content-between"
         style={{ backgroundColor: '#FF6F61' }}
       >
-        <a class="navbar-brand" href="/">
+        <a className="navbar-brand" href="/">
           {' '}
           MERN
         </a>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarSupportedContent"
@@ -55,15 +55,15 @@ class Header extends Component {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon" />
+          <span className="navbar-toggler-icon" />
         </button>
 
         <div
-          class="col-md-10 form-inline"
+          className="col-md-10 form-inline"
           style={{ textAlign: 'left', display: 'inline' }}
         >
           <input
-            class="form-control mr-sm-2"
+            className="form-control mr-sm-2"
             type="search"
             placeholder="Search"
             value={this.state.term}
@@ -73,9 +73,8 @@ class Header extends Component {
           />
 
           <button
-            class="btn btn-outline-light my-2 my-sm-0"
+            className="btn btn-outline-light my-2 my-sm-0"
             type="submit"
-            backgroundColor="#FFFFFF"
             onClick={() => this.onFormSubmit()}
           >
             Search
@@ -89,12 +88,15 @@ class Header extends Component {
         )}
 
         {this.state.isLogIn == 1 && (
-          <div class="col-md-1">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
+          <div className="col-md-1">
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item dropdown">
                   <a
-                    class="nav-link dropdown-toggle"
+                    className="nav-link dropdown-toggle"
                     href="#"
                     id="navbarDropdown"
                     role="button"
@@ -105,14 +107,14 @@ class Header extends Component {
                     User
                   </a>
                   <div
-                    class="dropdown-menu dropdown-menu-right"
+                    className="dropdown-menu dropdown-menu-right"
                     aria-labelledby="navbarDropdown"
                   >
-                    <a class="dropdown-item" href="/cart">
+                    <a className="dropdown-item" href="/cart">
                       Cart
                     </a>
-                    <div class="dropdown-divider" />
-                    <a class="dropdown-item" onClick={this.onLogOutClick}>
+                    <div className="dropdown-divider" />
+                    <a className="dropdown-item" onClick={this.onLogOutClick}>
                       Log Out
                     </a>
                   </div>

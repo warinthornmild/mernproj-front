@@ -31,14 +31,18 @@ class ItemList extends Component {
         key={idx}
       >
         <div
-          class="card"
-          style={{ width: '18rem', margin: '10px 10px 10px 10px', color: '#6F7073' }}
+          className="card"
+          style={{
+            width: '18rem',
+            margin: '10px 10px 10px 10px',
+            color: '#6F7073'
+          }}
         >
-          <img class="card-img-top" src={imurl} alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title">{name}</h5>
-            <p class="card-text">Price : {price} baht</p>
-            <p class="card-text">Released Date : {date.split('T')[0]}</p>
+          <img className="card-img-top" src={imurl} alt="Card image cap" />
+          <div className="card-body">
+            <h5 className="card-title">{name}</h5>
+            <p className="card-text">Price : {price} baht</p>
+            <p className="card-text">Released Date : {date.split('T')[0]}</p>
           </div>
         </div>
       </a>
